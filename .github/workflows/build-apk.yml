@@ -1,4 +1,4 @@
-name: Build POTATO GRAPHICS FF APK
+name: Build POTATO GRAPHICS v2.2 APK
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Java
@@ -26,25 +26,17 @@ jobs:
           gradle-version: '8.7'
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v4
-        with:
-          packages: ''
-          accept-android-sdk-licenses: 'true'
-          log-accepted-android-sdk-licenses: 'false'
+        uses: android-actions/setup-android@v3
 
-      - name: Install Android SDK packages
+      - name: Install SDK packages
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
-      - name: Extract project
-        run: unzip -o PotatoGraphicsFF_v2.2.zip -d project
-
       - name: Build APK
-        working-directory: project/PotatoGraphicsFF_v2.0
         run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: POTATO-GRAPHICS-FF-APK
-          path: project/PotatoGraphicsFF_v2.0/app/build/outputs/apk/debug/*.apk
+          name: POTATO-GRAPHICS-v2.2-APK
+          path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
