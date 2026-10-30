@@ -36,7 +36,7 @@ jobs:
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
       - name: Extract project
-        run: unzip -o PotatoGraphicsFF_v2.0_FIXED.zip -d project
+        run: unzip -o PotatoGraphicsFF_v2.2.zip -d project
 
       - name: Build APK
         working-directory: project/PotatoGraphicsFF_v2.0
